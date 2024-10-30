@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Debrief</title>
+</head>
+<body>
+<h1>
+    Colin & Mike N
+</h1>
+
+<h1>Project 13</h1>
+<a href="/casino">Link to the project</a>
+
+<h3>What made us smile</h3>
+<li>
+    Once Mike configured the gatway accounts with the specific methods, they showed up right away without any extra configuration needed.
+</li>
+<p>
+
+</p>
+<h3>What was confusing, did you encounter any issues?</h3>
+<ul>
+    <li>
+        For a beginner the difference between merchant account, gateway account, payment method is confusing. There are some explications in the docs, and glossary. However for example if we google "Rebilly add a payment method" we end up on this FramePay page which is quite confusing for a novice https://www.rebilly.com/docs/dev-docs/setup-multiple-payment-methods.
+    </li>
+    <li>
+        Search results were not great. API search is fine but searching the documentation doesn't provide helpful results.
+        <br>
+        <img src="/search_docs.png" alt="Search results">
+    </li>
+    <li>
+        Actually using ChatGPT gave much better results than the search bar on the Rebilly website.
+        <br>
+        <img src="/chatgpt1.png" alt="">
+        <img src="/chatgpt2.png" alt="">
+    </li>
+    <li>
+        Mike ended up using Stripe "resources" (not categorized as docs) to get some clarity on the difference between merchant account, gateway account, payment method. https://stripe.com/en-ca/resources/more/payment-gateways-101
+    </li>
+    <li>
+        Mike had to realize that configuring the payment methods would be done in the "gateway account" section.
+    </li>
+    <li>
+        Once Mike was configuring the gateways, it was not clear if he should select Skrill gateway in sandbox mode, or TestProcessor with Skrill method.
+    </li>
+    <li>
+        When configuring the gateway account, the list of payment methods was very long with options like `bank-transfer-2`, `bank-transfer-3` etc. What are these?
+    </li>
+    <li>
+        The payment methods showed up properly, but only credit card worked. For the others we got an error "Rebilly Instruments Error"
+        <img src="/instruments_error.png" alt="Rebilly Instruments Error">
+    </li>
+
+</ul>
+
+
+</body>
+</html>
