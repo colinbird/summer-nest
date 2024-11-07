@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Debrief</title>
+</head>
+<body>
+<h1>
+    Colin & Mike N
+</h1>
+
+<h1>Project 14</h1>
+<a href="/casino">Link to the project</a>
+
+<h3>What made us smile</h3>
+<li>
+    Mike did find the DCC configuration in the gateway account section. It was not clear at first, but he found it. After discovering the terminology, he was able to find it in the docs (also it was linked from the gateway account screen).
+</li>
+<p>
+
+</p>
+<h3>What was confusing, did you encounter any issues?</h3>
+<ul>
+    <li>
+        It was not clear that DCC was only for payment cards. It's mentioned in the <a href="https://www.rebilly.com/docs/settings/dynamic-currency-conversion">docs</a> but wasn't made explicitly clear.
+    </li>
+    <li>
+        Idea: Could Rebilly offer a DCC-like feature for other payment methods based on the customers billing address or primary address?
+    </li>
+    <li>
+        DCC is shown in the advanced gateway account settings even if the payment method is not payment-card. (Same for 3DS)
+    </li>
+    <li>
+        Regarding the docs, when searching for "Dynamic Currency Conversion" in the search bar, the page mentioned above is 5th on the list and the first few hits only include the term "currency"
+        <br>
+        <img src="../public/dcc-search.png" height="865" width="1261"/></li>
+    <li>
+    <li>
+        DCC worked when we attempted using the 4111 1111 1111 1111 test card, we saw the DCC screen and accepted. But upon return to instruments final screen, we see the amount in CAD instead of the USD paid.
+    </li>
+
+    <li>
+        Looking at the transaction in Rebilly, we see the DCC markup when hovering over the badge, but not in the timeline. In the timeline we see it the rate but not the markup.
+        <br>
+        <img src="../public/dcc-badge.png" height="460" width="808"/>
+    </li>
+
+    <li>
+        Even though it wasn't asked in the training we tried the forced DCC option. This also worked but the customer is never shown the markup. This seems like a potential issue.
+    </li>
+
+</ul>
+
+
+</body>
+</html>
