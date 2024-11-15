@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Debrief</title>
+</head>
+<body>
+<h1>
+    Colin & Mike N
+</h1>
+
+<h1>Project 14</h1>
+<a href="/casino">Link to the project</a>
+
+<h3>What made us smile</h3>
+<li>
+    Mike found the 3DS configuration in the gateway account section. He was able to find it in the docs (also it was linked from the gateway account screen).
+    Mike was able to configure two CAD gateway accounts and using "additional restrictions" on payment card bank country, he was able to restrict 3DS to canadian cards only.
+    I showed another way of doing it, using the rules engine and the gateway-account-requested rule. He understood the concept and was able to configure it.
+</li>
+<p>
+
+</p>
+<h3>What was confusing, did you encounter any issues?</h3>
+<ul>
+    <li>
+        Why not just remove Test3dsProcessor. It's confusing whether to test with Test3dsProcessor or Test3dSecureIOProcessor. We can remove Test3dsProcessor to simplify things for developers.
+    </li>
+    <li>
+        We noticed a bug when switching between payment cards. Pick one card, then pick another and proceed.
+        <img src="/switch-card-bug.png" alt="3DS bug">
+        <br>
+        <img src="/instruments-bug-change-card.gif" alt="3DS bug animation">
+    </li>
+    <li>
+        It is laborious to configure 3DS. We have to configure a lot of fields and it's not clear what they do. Maybe we could auto-populate these fields on sandbox?
+        <br><img src="/configure-3ds.png" alt="3DS fields">`
+
+    </li>
+    <li>
+        When configuring 3DS the field names are pretty technical. Acquirer merchant ID vs merchant acquirer bin etc. It would be good to have more descriptive names, could we a definition from the API spec?
+    <li>
+    <li>
+        Noticed a bug with currency / amount rendering.
+        <br><img src="/text-bug.png" alt="Currency amount bug">
+    </li>
+        Mike had setup two gateway accounts, one with USD and one with CAD with 3DS enabled.
+        <br>I mentioned that the training requirement was for Canadian bank cards to pass through 3DS. What about non-Canadian cards doing a transaction in CAD? Under his current config, they would go through 3DS too.
+    <li>
+        Mike noticed the "Additional restrictions" under the gateway account advanced options and had the idea to add the bank country = CA restriction on the CAD 3DS gateway account.
+        <br.He then configured another CAD gateway account with a different restriction bank country != CA.
+    </li>
+
+    <li>
+        I suggested using the rules engine -> gateway account requested and Mike was able to configure it that way too.
+    </li>
+
+    <li>
+        When reviewing transactions, the gateway logs can be confusing and seem out of order. The transaction is marked as approved, but the logs are shown "afterwards". This is confusing,  since we receive the response from the gateway, and then mark the transaction as approved. It's even more confusing when there are extra logs for 3DS.
+    </li>
+
+    <li>
+
+    </li>
+
+
+</ul>
+
+
+</body>
+</html>
