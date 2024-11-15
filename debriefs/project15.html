@@ -24,10 +24,11 @@
 <h3>What was confusing, did you encounter any issues?</h3>
 <ul>
     <li>
-        Why not just remove Test3dsProcessor. It's confusing whether to test with Test3dsProcessor or Test3dSecureIOProcessor. We can remove Test3dsProcessor to simplify things for developers.
+        Why not just remove Test3dsProcessor. It's confusing whether to test with TestSandbox3dsServer or ThreeDSecureIO3dsServer. We can remove TestSandbox3dsServer to simplify things for developers. Testing through 3dsecure.io is a better test and looks more legitimate.
     </li>
     <li>
         We noticed a bug when switching between payment cards. Pick one card, then pick another and proceed.
+        <br>
         <img src="/switch-card-bug.png" alt="3DS bug">
         <br>
         <img src="/instruments-bug-change-card.gif" alt="3DS bug animation">
@@ -39,7 +40,12 @@
     </li>
     <li>
         When configuring 3DS the field names are pretty technical. Acquirer merchant ID vs merchant acquirer bin etc. It would be good to have more descriptive names, could we a definition from the API spec?
+    </li>
     <li>
+        After noticing the term ThreeDSecureIO3dsServer we searched the docs for it, but there are no hits on the API. But it is possible to manually navigate to that part of the gateway account API. Just surprised we are not searching the whole API here.
+        <img src="/docs-search-api.png" alt="3DS logs">
+        <br><img src="/docs-search-api-2.png" alt="3DS logs">
+    </li>
     <li>
         Noticed a bug with currency / amount rendering.
         <br><img src="/text-bug.png" alt="Currency amount bug">
@@ -50,22 +56,13 @@
         Mike noticed the "Additional restrictions" under the gateway account advanced options and had the idea to add the bank country = CA restriction on the CAD 3DS gateway account.
         <br>He then configured another CAD gateway account with a different restriction bank country != CA.
     </li>
-
     <li>
         I suggested using the rules engine -> gateway account requested and Mike was able to configure it that way too.
     </li>
-
     <li>
         When reviewing transactions, the gateway logs can be confusing and seem out of order. The transaction is marked as approved, but the logs are shown "afterwards". This is confusing,  since we receive the response from the gateway, and then mark the transaction as approved. It's even more confusing when there are extra logs for 3DS.
     </li>
-
-    <li>
-
-    </li>
-
-
 </ul>
-
 
 </body>
 </html>
