@@ -21,16 +21,32 @@
 </p>
 <h3>What was confusing, did you encounter any issues?</h3>
 <ul>
-    <li>When selecting the payout methods, it may be better to have a list where you can pick which ones you want, instead of having to add each one individually</li>
+    <li>When selecting the payout methods in the rule, it may be better to have a list where you can pick which ones you want, instead of having to add each one individually</li>
 
-    <li>It seems there are a lot of conditions that don't apply.  As far as we understand, for Ready To Payout there is no invoice, transaction etc but all of those condition fields are shown</li>
+    <img src="/select-methods.png" alt="post payout">
 
-    <li>It wasn't clear how to configure the conditions for country, primary address country didn't seem to work. Neither did riskmetadata country</li>
+    <li>It seems there are a lot of conditions that don't apply.  As far as we understand, for Ready To Payout there is no invoice, transaction etc but all of those condition fields are shown. It's very confusing when you don't know which conditions may actually work.</li>
 
-    <li>We can see in the Ready to Payout API request, that we are sending a "billing address" but how do we configure it in the rules?</li>
+    <img src="/conditions.png" alt="conditions">
 
-    <li>How are we supposed to get the country? From the IP address?  IP address is not sent in the API request.</li>
-    
+    <li>It wasn't clear how to configure the conditions for the customer's country. We see that `billingAddress` is posted as part of the ready-to-payout POST request, but what billing address is this? There is no transaction or payment method yet. In our case it was populated with the customer's primary address (by Instruments) so we configured the rule with the Customer -> Primary Address since there was no way to choose the `billingAddress->country` as posted in the API request.</li>
+
+    <li>The ready-to-payout POST request also has an `ipAddress` in the API definition, but it wasn't posted by instruments. We weren't sure if we could use that to determine the country</li>
+
+    <li>The riskMetadata under a transaction includes a country, but it seems not in the case for ready-to-pay riskMetadata element</li>
+
+    <li>So we got it working using customer primary address</li>
+
+    <li>Another idea would be to add a currency selector on the page, and do it by currency.</li>
+
+    <li>Can't search for gateway accounts, filtering if payouts are enabled or not. Have to check each gateway account individually</li>
+
+    <li>On the payout allocation form, you are selecting by gateway name / payment instrument but in reality just the payment instrument id is sent in the payout request</li>
+
+    <img src="/post-payout.png" alt="post payout">
+
+    <li>ITS currently calls `PUT /mgs/pay-outs` endpoint in batch, there they specify the gateway account id. There is no way to "allocate" a payout using a specific gateway account.</li>
+
 </ul>
 
 </body>
