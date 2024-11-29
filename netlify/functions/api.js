@@ -1,28 +1,22 @@
 import express, {Router} from "express";
 import serverless from "serverless-http";
 import RebillyAPI from "rebilly-js-sdk";
-
 export async function handler(event, context) {
     const app = express();
     const router = Router();
     router.use(express.json());
-
     const api = RebillyAPI({
         apiKey: process.env.REBILLY_API_KEY,
         organizationId: 'summer-nest---phronesis',
         sandbox: true
     });
-
     router.get('/hello', (req, res) => {
         res.send('Hello World');
     });
-
     router.post('/makedonation', async (req, res) => {
         // req.body is a binary, how to get the body params
         const {amount, paymentType} = req.body;
-
         console.log(req.body);
-
         const customer = await api.customers.get({id: 'cus_01J6HNWJ61NBF3JGA8XH76SVE2'});
         const data = {
             mode: 'passwordless',
@@ -110,15 +104,12 @@ export async function handler(event, context) {
             console.log(e)
         }
 
-
     });
-
     router.get('/getinvoices', async (req, res) => {
         const invoices = await api.invoices.getAll({
             filter: 'customerId:cus_01J6HNWJ61NBF3JGA8XH76SVE2',
             sort: 'createdTime:desc'
         });
-
         const data = {
             mode: 'passwordless',
             customerId: 'cus_01J6HNWJ61NBF3JGA8XH76SVE2',
@@ -154,22 +145,17 @@ export async function handler(event, context) {
                     },
                 },
             });
-
         res.json({
             invoices: invoices.items.map((invoice) => {
                 return invoice.fields;
             }),
         });
     });
-
     // create endpoint to create order and return invoiceId
     router.post('/makeorder', async (req, res) => {
         // take planId and quantity from req.body
-
         const {planId, quantity} = req.body;
-
         console.log(req.body);
-
         const customer = await api.customers.get({id: 'cus_01J6HNWJ61NBF3JGA8XH76SVE2'});
         const data = {
             mode: 'passwordless',
@@ -178,7 +164,6 @@ export async function handler(event, context) {
         const {fields: login} = await api.customerAuthentication.login({
             data,
         });
-
 
         const subsData =
             {
@@ -193,11 +178,9 @@ export async function handler(event, context) {
                         quantity: +quantity,
                     }
                 ],
-
             };
         try {
             const subscription = await api.subscriptions.create({data: subsData});
-
 
             const {fields: exchangeToken} =
                 await api.customerAuthentication.exchangeToken({
@@ -245,7 +228,6 @@ export async function handler(event, context) {
                     },
                 });
 
-
             return res.json({
                 jwt: exchangeToken.token,
                 invoiceId: subscription.fields.recentInvoiceId
@@ -254,11 +236,8 @@ export async function handler(event, context) {
             console.log(e)
         }
     });
-
     router.post('/funnel', async (req, res) => {
-
         const {tokenId} = req.body;
-
         const transactionData = {
             customerId: 'cus_01J6HNWJ61NBF3JGA8XH76SVE2',
             type: 'sale',
@@ -270,43 +249,87 @@ export async function handler(event, context) {
             amount: 10.99,
             description: 'funnel',
         };
-
         try {
             const transaction = await api.transactions.create({data: transactionData});
             return res.json({result: transaction.fields.result});
-
         } catch (e) {
             console.log(e)
-
         }
+    });
 
+    router.post('/authenticate', async (req, res) => {
+        const {customerId} = req.body;
+        const data = {
+            mode: "passwordless",
+            customerId,
+        };
+        const {fields: login} = await api.customerAuthentication.login({
+            data,
+        });
+        const {fields: exchangeToken} =
+            await api.customerAuthentication.exchangeToken({
+                token: login.token,
+                data: {
+                    acl: [
+                        {
+                            scope: {
+                                organizationId: ['summer-nest---phronesis'],
+                            },
+                            permissions: [
+                                "PostToken",
+                                "StorefrontGetPaymentInstrumentCollection",
+                                "StorefrontPostPaymentInstrument",
+                                "StorefrontGetPaymentInstrument",
+                                "StorefrontPatchPaymentInstrument",
+                                "StorefrontGetAccount",
+                                "StorefrontGetWebsite",
+                                "StorefrontPostReadyToPay",
+                                "StorefrontGetPayoutRequestCollection",
+                                "StorefrontGetPayoutRequest",
+                                "StorefrontPatchPayoutRequest",
+                                "StorefrontPostReadyToPayout",
+                            ],
+                        },
+                    ],
+                    customClaims: {
+                        websiteId: 'rebilly.com',
+                    },
+                },
+            });
+        res.send({token: exchangeToken.token});
+    });
+
+    router.post("/payout-request", async function (req, res) {
+        const { customerId, amount, currency } = req.body;
+        const { fields: payoutRequest } = await api.payoutRequests.create({
+            data: {
+                websiteId: "rebilly.com",
+                customerId,
+                currency,
+                amount,
+            },
+        });
+        res.send({ payoutRequest });
     });
 
     router.post('/deposit-request', async (req, res) => {
-
         console.log(req.body);
 
-
-
         const {customerId, currency} = req.body;
-
         console.log('currency' + currency);
         const response = {};
         const data = {
             mode: "passwordless",
             customerId,
         };
-
         const rebilly = RebillyAPI({
             apiKey: process.env.REBILLY_API_KEY,
             organizationId: 'summer-nest---phronesis',
             sandbox: true
         });
-
         const { fields: login } = await rebilly.customerAuthentication.login({
             data,
         });
-
         const { fields: exchangeToken } =
             await rebilly.customerAuthentication.exchangeToken({
                 token: login.token,
@@ -348,27 +371,20 @@ export async function handler(event, context) {
                     },
                 },
             });
-
         const requestDepositData = {
             websiteId: 'rebilly.com',
             customerId: 'cus_01J6HNWJ61NBF3JGA8XH76SVE2',
             currency: currency,
             strategyId: currency === 'CAD' ? "dep_str_01JB00M8CYJNEE3Y4NAEGS79YM" : "dep_str_01JB00JHEV7PD470C8NYBVJHC2"
         };
-
         const { fields: depositFields } = await rebilly.depositRequests.create({
             data: requestDepositData,
         });
-
         response.token = exchangeToken.token;
         response.depositRequestId = depositFields.id;
         res.send(response);
     });
-
     app.use('/api/', router);
-
     return serverless(app)(event, context);
 }
-
-
 
