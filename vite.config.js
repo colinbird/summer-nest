@@ -23,7 +23,8 @@ export default defineConfig({
                 invoices: 'invoices.html',
                 products: 'products.html',
                 funnel: 'funnel.html',
-		casino: 'casino.html',
+		        casino: 'casino.html',
+                payout: 'payout.html',
                 ...getHtmlFiles('debriefs')
             }
         }
