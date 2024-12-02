@@ -14,7 +14,7 @@
 
 <h3>What made us smile</h3>
 <li>
-    Once Mike found the rules, he was able to set it up quickly. He was able to configure the rule for "Ready to payout requested"
+    Once Mike found the rules, he was able to set it up quickly. He was able to configure the rule for "Ready to payout requested" based on the customer's primary address.
 </li>
 <p>
 
@@ -30,6 +30,8 @@
     <img src="/conditions.png" alt="conditions">
 
     <li>It wasn't clear how to configure the conditions for the customer's country. We see that `billingAddress` is posted as part of the ready-to-payout POST request, but what billing address is this? There is no transaction or payment method yet. In our case it was populated with the customer's primary address (by Instruments) so we configured the rule with the Customer -> Primary Address since there was no way to choose the `billingAddress->country` as posted in the API request.</li>
+
+    <li>e-check doesn't show up, even through ready-to-payout returns it. This is probably due to how echeck was implemented on the FE with a bunch of workarounds</li>
 
     <li>The ready-to-payout POST request also has an `ipAddress` in the API definition, but it wasn't posted by instruments. We weren't sure if we could use that to determine the country</li>
 
