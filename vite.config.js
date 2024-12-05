@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 import fs from 'fs';
 import path from 'path';
 
@@ -25,9 +26,18 @@ export default defineConfig({
                 funnel: 'funnel.html',
 		        casino: 'casino.html',
                 payout: 'payout.html',
-                '.well-known/apple-developer-merchantid-domain-association': 'public/.well-known/apple-developer-merchantid-domain-association',
                 ...getHtmlFiles('debriefs')
             }
         }
-    }
+    },
+    plugins: [
+        viteStaticCopy({
+            targets: [
+                {
+                    src: 'public/.well-known/apple-developer-merchantid-domain-association',
+                    dest: '.well-known'
+                }
+            ]
+        })
+    ]
 });
