@@ -25,7 +25,7 @@ export default defineConfig({
                 funnel: 'funnel.html',
 		        casino: 'casino.html',
                 payout: 'payout.html',
-                '.well-known/apple-developer-merchantid-domain-association': 'public/.well-known/apple-developer-merchantid-domain-association'
+                '.well-known/apple-developer-merchantid-domain-association': 'public/.well-known/apple-developer-merchantid-domain-association',
                 ...getHtmlFiles('debriefs')
             }
         }
