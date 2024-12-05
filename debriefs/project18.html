@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Debrief</title>
+</head>
+<body>
+<h1>
+    Colin & Mike N
+</h1>
+
+<h1>Project 17</h1>
+<a href="/payout">Link to the project</a>
+
+<h3>What made us smile</h3>
+<li>
+    Google Pay and Apple Pay buttons showed right away once we found the right way to configure it.
+</li>
+<li>
+    Google Pay worked, testing with a real card.
+</li>
+<p>
+
+</p>
+<h3>What was confusing, did you encounter any issues?</h3>
+<ul>
+    <li>
+        Looking at the docs, we find only FramePay docs which is quite confusing since we're using instruments. Colin told Mike to ignore these and just attempt to configure it in the app.
+    </li>
+    <li>
+        At first Mike configured the method as "Apple Pay" and "Google Pay" but this is for the legacy hook page used by MGS operators. <storng>We should not show these methods for non-MGS merchants</storng>
+    </li>
+    <li>
+        Mike found the correct way to configure it under the gateway account and then the Google Pay button appeared correctly.
+    </li>
+    <li>
+        Testing on Colin's iPhone we could also see the Apple Pay button.
+    </li>
+    <li>
+        When Apple Pay didn't work, we asked the AI docs and found the page about registering the domain.
+    </li>
+    <li>
+        The docs for registering the domain didn't show the sandbox URL, but we found it elsewhere (https://api-sandbox.rebilly.com/...)
+    </li>
+    <li>
+        We managed to register the domain. Then the Apple Pay dialog opened but we got an error on processing, the error was local to the phone. We wonder if it's because we were testing with a live card.
+    </li>
+    <li>
+        We wonder why it shows rebilly.com in the Apple Pay dialog, since we configured the display name as "Rebilly Casino"
+        <img src="apple-dialog.png" alt="Apple Pay dialog">
+    </li>
+</ul>
+
+</body>
+</html>
