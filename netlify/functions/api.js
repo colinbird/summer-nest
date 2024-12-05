@@ -17,7 +17,7 @@ export async function handler(event, context) {
         // req.body is a binary, how to get the body params
         const {amount, paymentType} = req.body;
         console.log(req.body);
-        const customer = await api.customers.get({id: 'cus_01J6HNWJ61NBF3JGA8XH76SVE2'});
+        const customer = await api.customers.get({id: 'test-customer'});
         const data = {
             mode: 'passwordless',
             customerId: customer.fields.id,
@@ -55,7 +55,7 @@ export async function handler(event, context) {
             });
 //Create subs
         const subsData = {
-            customerId: 'cus_01J6HNWJ61NBF3JGA8XH76SVE2',
+            customerId: 'test-customer',
             websiteId: 'rebilly.com',
         }
         if (paymentType === 'one-time') {
@@ -107,12 +107,12 @@ export async function handler(event, context) {
     });
     router.get('/getinvoices', async (req, res) => {
         const invoices = await api.invoices.getAll({
-            filter: 'customerId:cus_01J6HNWJ61NBF3JGA8XH76SVE2',
+            filter: 'customerId:test-customer',
             sort: 'createdTime:desc'
         });
         const data = {
             mode: 'passwordless',
-            customerId: 'cus_01J6HNWJ61NBF3JGA8XH76SVE2',
+            customerId: 'test-customer',
         };
         const {fields: login} = await api.customerAuthentication.login({
             data,
@@ -156,7 +156,7 @@ export async function handler(event, context) {
         // take planId and quantity from req.body
         const {planId, quantity} = req.body;
         console.log(req.body);
-        const customer = await api.customers.get({id: 'cus_01J6HNWJ61NBF3JGA8XH76SVE2'});
+        const customer = await api.customers.get({id: 'test-customer'});
         const data = {
             mode: 'passwordless',
             customerId: customer.fields.id,
@@ -167,7 +167,7 @@ export async function handler(event, context) {
 
         const subsData =
             {
-                customerId: 'cus_01J6HNWJ61NBF3JGA8XH76SVE2',
+                customerId: 'test-customer',
                 websiteId: 'rebilly.com',
                 orderType: 'one-time-order',
                 items: [
@@ -239,7 +239,7 @@ export async function handler(event, context) {
     router.post('/funnel', async (req, res) => {
         const {tokenId} = req.body;
         const transactionData = {
-            customerId: 'cus_01J6HNWJ61NBF3JGA8XH76SVE2',
+            customerId: 'test-customer',
             type: 'sale',
             websiteId: 'rebilly.com',
             paymentInstruction: {
@@ -373,7 +373,7 @@ export async function handler(event, context) {
             });
         const requestDepositData = {
             websiteId: 'rebilly.com',
-            customerId: 'cus_01J6HNWJ61NBF3JGA8XH76SVE2',
+            customerId: 'test-customer',
             currency: currency,
             strategyId: currency === 'CAD' ? "dep_str_01JB00M8CYJNEE3Y4NAEGS79YM" : "dep_str_01JB00JHEV7PD470C8NYBVJHC2"
         };

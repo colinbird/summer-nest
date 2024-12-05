@@ -1,4 +1,4 @@
-const customerId = "cus_01J6HNWJ61NBF3JGA8XH76SVE2";
+const customerId = "test-customer";
 let authorization = null;
 (async () => {
     const response = await fetch("/api/authenticate", {

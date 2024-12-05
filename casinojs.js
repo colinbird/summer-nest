@@ -1,4 +1,4 @@
-const customerId = "cus_01J6HNWJ61NBF3JGA8XH76SVE2";
+const customerId = "test-customer";
 
 document.querySelectorAll(".currency-button").forEach( (button) => {
     button.addEventListener("click", async (e) => {
