@@ -35,7 +35,7 @@
     <li>
         The AI recommended using deposit strategies to tag the VIP customers.
         <br>We are unable to edit filters on deposit strategies. Seems like a bug.
-        <br><img src="../public/gateway-restrictions.png" height="358" width="826"/><img src="/strategies-edit.png" alt="Deposit strategy">
+        <br><img src="/strategies-edit.png" alt="Deposit strategy">
     </li>
     <li>
         Gateway account restrictions would be a perfect place to ensure that only VIP customers could use Skrill, but tags are not available in the filters, unfortunately.
@@ -43,7 +43,11 @@
     </li>
     <li>
         Another way to do this is with the gateway account selected event, tags are available there.
+        <br><img src="/gateway-account-requested.png" alt="Gateway account requested">
+    </li>
+    <li>
         <br>It seems the best way (besides the gateway account restriction which doesn't work) would be the `ready to pay was requested` rule.
+        <img src="/rtp-requested.png" alt="Ready to pay requested">
         <br>We have so many ways to accomplish this, having docs on the best practices would be helpful.
     </li>
     <li>
