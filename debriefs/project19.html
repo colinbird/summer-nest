@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Debrief</title>
+</head>
+<body>
+<h1>
+    Colin & Mike N
+</h1>
+
+<h1>Project 19</h1>
+<a href="/payout">Link to the project</a>
+
+<h3>What made us smile</h3>
+<li>
+    Mike was able to use the AI docs search to find out how to configure most steps.
+</li>
+<p>
+
+</p>
+<h3>What was confusing, did you encounter any issues?</h3>
+<ul>
+    <li>
+        Mike, with the help of the AI search, was able to find where to configure the rule to tag the VIP customers.
+        <br/>`On Invoice paid -> InvoiceCustomerLifetime revenueAmountgreater or equal to 10000 -> Add tag VIP`
+        <br/>
+        But invoices are not created for all transactions, so the event should be changed to `Transaction processed`.
+        <br/>This isn't a bug but it's easy to see merchants doing this.
+    </li>
+    <li>
+        Capitalization is wrong in the segment names. Should be "VIP"
+        <br><img src="/segment.png" alt="Segment names">
+    </li>
+    <li>
+        The AI recommended using deposit strategies to tag the VIP customers.
+        <br>We are unable to edit filters on deposit strategies. Seems like a bug.
+        <br><img src="../public/gateway-restrictions.png" height="358" width="826"/><img src="/strategies-edit.png" alt="Deposit strategy">
+    </li>
+    <li>
+        Gateway account restrictions would be a perfect place to ensure that only VIP customers could use Skrill, but tags are not available in the filters, unfortunately.
+        <br><img src="/gateway-restrictions.png" alt="Gateway restrictions">
+    </li>
+    <li>
+        Another way to do this is with the gateway account selected event, tags are available there.
+        <br>It seems the best way (besides the gateway account restriction which doesn't work) would be the `ready to pay was requested` rule.
+        <br>We have so many ways to accomplish this, having docs on the best practices would be helpful.
+    </li>
+    <li>
+        Actually we noticed that the AI search is a great way to test if our docs cover the topics. When we have good docs, the AI is able to find the answers.
+    </li>
+
+</ul>
+
+</body>
+</html>
