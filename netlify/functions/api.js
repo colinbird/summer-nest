@@ -384,6 +384,33 @@ export async function handler(event, context) {
         response.depositRequestId = depositFields.id;
         res.send(response);
     });
+
+    router.post('/create-deposit-request', async (req, res) => {
+        console.log(req.body);
+
+        const {customerId, currency} = req.body;
+        console.log('currency' + currency);
+        const response = {};        
+        const rebilly = RebillyAPI({
+            apiKey: process.env.REBILLY_API_KEY,
+            organizationId: 'summer-nest---phronesis',
+            sandbox: true
+        });
+        
+        const requestDepositData = {
+            websiteId: 'rebilly.com',
+            customerId: customerId,
+            currency: currency,
+            //strategyId: currency === 'CAD' ? "dep_str_01JB00M8CYJNEE3Y4NAEGS79YM" : "dep_str_01JB00JHEV7PD470C8NYBVJHC2"
+        };
+        const { fields: depositFields } = await rebilly.depositRequests.create({
+            data: requestDepositData,
+        });
+        console.log(depositFields);
+        response.token = depositFields.cashierToken;
+        res.send(response);
+    });
+
     app.use('/api/', router);
     return serverless(app)(event, context);
 }

@@ -25,6 +25,7 @@ export default defineConfig({
                 products: 'products.html',
                 funnel: 'funnel.html',
 		        casino: 'casino.html',
+                casino2: 'casino2.html',
                 payout: 'payout.html',
                 ...getHtmlFiles('debriefs')
             }
