@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+body, button, input, select, textarea {
+    font-family: 'Inter', sans-serif !important;
+}
+
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    color: #333333;
+}
+
+#deposit {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Rebilly Cashier overrides */
+:root {
+    --r-primary: cornflowerblue;
+    --r-background: #ffffff;
+    --r-text: #333333;
+    --r-input-text: #333333;
+    --r-input-background: #ffffff;
+    --r-font-family: 'Inter', sans-serif !important;
+    --r-border-radius: 0px;
+    --r-payment-method-border-color: #AFE1AF;
+    --r-payment-method-border-width: 3px;
+}
+
+/* Additional Rebilly specific overrides */
+.r-button {
+    border-radius: 0 !important;
+    color: #333333 !important;
+    background-color: #ffffff !important;
+    border: 1px solid #333333 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.r-payment-method {
+    border-radius: 0 !important;
+    background-color: #ffffff !important;
+    color: #333333 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+button[class*="payment-method"],
+.r-payment-method-item {
+    border: 5px solid #AFE1AF !important;
+    border-radius: 0 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.r-payment-method *,
+.r-payment-method-item * {
+    color: #333333 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.r-payment-method-title,
+.r-payment-method-description {
+    color: #333333 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+.r-input {
+    color: #333333 !important;
+    background-color: #ffffff !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    #deposit {
+        padding: 15px;
+        margin: 10px;
+    }
+} 
