@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Debrief</title>
+</head>
+<body>
+<h1>
+    Colin & Francis
+</h1>
+
+<h1>Project 22</h1>
+<a href="/casino2.html">Link to the project</a>
+
+<h3>What made us smile</h3>
+<li>
+    Volume limits were easy to configure, we found the configuration under the gateway account. Although it wasn't in the typical settings screen.
+</li>
+<p>
+
+</p>
+<h3>What was confusing, did you encounter any issues?</h3>
+<ul>
+    <li>
+        We were not able to configure a volume limit in CAD since our reporting currency is USD.
+    </li>
+    <li>
+        Sticky gateway seems to override the volume limits. We checked the code and the volume limits are not being enforced on the sticky gateway.
+    </li>
+    <li>
+        The exercise asks to set D then C then E gateway priority but this is not possible with the weighted gateway selection rule. We effectively achieved this by setting the weights to D:999999999999999 and C:1 (and E:0).
+
+        <br><br>
+        <img src="/15_9s.png">
+    </li>
+    <li>
+        The limits are calculated by cron job running every 5 minutes. This is not ideal for a live system. We would prefer to see the limits calculated in real-time. It's possible to go over the volume limits within 5 minutes.
+    </li>
+<li>
+    
+</li>
+<li>
+    
+</li>
+</ul>
+
+</body>
+</html>
