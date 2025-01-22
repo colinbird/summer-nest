@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Debrief</title>
+</head>
+<body>
+<h1>
+    Colin & Francis
+</h1>
+
+<h1>Project 23</h1>
+<a href="/casino2.html">Link to the project</a>
+
+<h3>What made us smile</h3>
+<li>
+    We were able to configure the gateway account and simulate approved and declined transactions based on test cards from Checkout.com docs.
+</li>
+<p>
+
+</p>
+<h3>What was confusing, did you encounter any issues?</h3>
+<ul>
+    <li>
+        We don't log the HTTP status code (or method ie POST) by default in the gateway logs. This would be useful for debugging as initially we had the wrong API key configured and got a 401.
+    </li>
+    <li>
+        The 401 was logged as the gateway original code but this is specific to the Checkout.com integration.
+    </li>
+    <li>
+        There can be a lag between when the transaction happens and when the gateway log is shown. This can be confusing for a new developer integrating since it seems like there are no logs and they may not try reloading the transaction details screen after ~1 minute.
+    </li>
+</ul>
+
+</body>
+</html>
