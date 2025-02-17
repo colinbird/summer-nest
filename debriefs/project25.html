@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Debrief</title>
+</head>
+<body>
+<h1>
+    Colin & Francis
+</h1>
+
+<h1>Project 25</h1>
+<a href="/casino2.html">Link to the project</a>
+
+<h3>What made us smile</h3>
+<li>
+
+</li>
+<p>
+
+</p>
+<h3>What was confusing, did you encounter any issues?</h3>
+<ul>
+    <li>
+        It took a while to find the IPN URL in the gateway account screen.
+    </li>
+    <li>
+        We didn't get a dispute for an amount of 1040, even though the documentation says we should.
+    </li>
+    <li>
+        The dispute was not properly mapped. It should be type=fraud.
+    </li>
+    <li>
+        In the email notification form, some placeholders are shown multiple times.
+    </li>
+    <li>
+        We got the email, but gmail reports that DKIM and DMARC failed. Since the email is from colin.bird@rebilly.com but the headers are for mg.rebilly.email.
+    </li>
+    <li>
+        It seems like we should use a value like no-reply@mgs.rebilly.com and use the reply-to: address for the from address saved by the user in Recomm. This way it will not be marked as spam.
+    </li>
+</ul>
+
+</body>
+</html>
