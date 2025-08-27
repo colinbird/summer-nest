@@ -420,6 +420,8 @@ export async function handler(event, context) {
 
     router.post("/create-cashier", async (req, res) => {
         console.log("✅ create-cashier route hit");  // <-- add this
+        const {customerId, currency} = req.body;
+
 
         const rebilly = RebillyAPI({
             apiKey: process.env.REBILLY_API_KEY,
@@ -432,8 +434,8 @@ export async function handler(event, context) {
                 data: {
                     websiteId: 'rebilly.com',
                     customerId: 'test-customer-2',
-                    currency: "CAD",
-                    redirectUrl: "https://example.com/redirect"
+                    currency: currency,
+                    redirectUrl: "https://summer-nest-2.netlify.app/casino"
                 },
             });
 
