@@ -1,6 +1,7 @@
 import express, {Router} from "express";
 import serverless from "serverless-http";
 import RebillyAPI from "rebilly-js-sdk";
+const RebillySDK = require("rebilly-js-sdk").default;
 export async function handler(event, context) {
     const app = express();
     const router = Router();
@@ -409,6 +410,47 @@ export async function handler(event, context) {
         console.log(depositFields);
         response.token = depositFields.cashierToken;
         res.send(response);
+    });
+
+    router.post("/create-cashier", async (req, res) => {
+        console.log("✅ create-cashier route hit");  // <-- add this
+        /*
+        const rebilly = RebillyAPI({
+            apiKey: process.env.REBILLY_API_KEY,
+            organizationId: 'summer-nest---phronesis',
+            sandbox: true
+        });
+        */
+
+        const rebilly = RebillySDK({
+            organizationId: 'summer-nest---phronesis',
+            sandbox: true,
+            apiKey: process.env.REBILLY_API_KEY,
+        });
+
+        try {
+            const response = await rebilly.cashiers.create({
+                data: {
+                    websiteId: 'rebilly.com',
+                    customerId: 'test-customer',
+                    currency: "CAD",
+                },
+            });
+
+            console.log(response);
+
+
+            const cashierToken = response.fields.cashierToken;
+
+            res.send({ cashierToken });
+        } catch (error) {
+            if (error?.response?.data) {
+                console.error(error.response.data);
+            } else {
+                console.error(error);
+            }
+            res.status(500).send({ error: 'Failed to create cashier' });
+        }
     });
 
     app.use('/api/', router);

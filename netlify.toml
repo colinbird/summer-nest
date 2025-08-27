@@ -9,3 +9,8 @@ force = true
 from = "/api/*"
 status = 200
 to = "/.netlify/functions/api/:splat"
+[dev]
+command = "npm run dev"    # or "yarn dev" if you use yarn
+port = 30300
+publish = "dist"
+functions = "netlify/functions"

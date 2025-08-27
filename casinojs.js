@@ -4,7 +4,7 @@ document.querySelectorAll(".currency-button").forEach( (button) => {
     button.addEventListener("click", async (e) => {
         // check if button ID cad-button or usd-button to determine currency
         const currency = e.target.id === "cad-button" ? "CAD" : "USD";
-        const response = await fetch("/api/deposit-request", {
+        const response = await fetch("/api/create-cashier", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -12,14 +12,21 @@ document.querySelectorAll(".currency-button").forEach( (button) => {
             },
             body: JSON.stringify({ customerId, currency }),
         });
-        const { token, depositRequestId } = await response.json();
-        RebillyInstruments.destroy();
-        RebillyInstruments.mount({
-            apiMode: "sandbox",
-            deposit: {
-                depositRequestId,
-            },
-            jwt: token,
-        });
+        const { cashierToken } = await response.json();
+        if (!cashierToken) {
+            console.error("Failed to retrieve cashier token");
+            return;
+        }
+
+        const mountElement = document.querySelector("#deposit");
+
+        if (window.RebillyCashier) {
+            window.RebillyCashier.renderDeposit({
+                mountElement,
+                cashierToken,
+            });
+        } else {
+            console.error("RebillyCashier library not loaded");
+        }
     });
 });
