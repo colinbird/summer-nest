@@ -7,9 +7,14 @@ export async function handler(event, context) {
     const router = Router();
     router.use(express.json());
     const api = RebillyAPI({
-        apiKey: process.env.REBILLY_API_KEY,
-        organizationId: 'summer-nest---phronesis',
-        sandbox: true
+        apiKey: 'sk_sandbox_K2ZtKoNIhFQg4e3HPgCWQtzRWhg803uTApWzBem', //process.env.REBILLY_API_KEY,
+        //organizationId: 'summer-nest---phronesis',
+        organizationId: '11111',
+        sandbox: true,
+        urls: {
+            live: 'https://api.rebilly.com',
+            sandbox: 'https://api-sandbox.local.rebilly.dev',
+        }
     });
     router.get('/hello', (req, res) => {
         res.send('Hello World');
@@ -338,6 +343,7 @@ export async function handler(event, context) {
                     acl: [
                         {
                             scope: {
+                                //organizationId: ["summer-nest---phronesis"],
                                 organizationId: ["summer-nest---phronesis"],
                             },
                             permissions: [
@@ -414,36 +420,42 @@ export async function handler(event, context) {
 
     router.post("/create-cashier", async (req, res) => {
         console.log("✅ create-cashier route hit");  // <-- add this
-        /*
+
         const rebilly = RebillyAPI({
             apiKey: process.env.REBILLY_API_KEY,
             organizationId: 'summer-nest---phronesis',
             sandbox: true
-        });
-        */
-
-        const rebilly = RebillySDK({
-            organizationId: 'summer-nest---phronesis',
-            sandbox: true,
-            apiKey: process.env.REBILLY_API_KEY,
         });
 
         try {
             const response = await rebilly.cashiers.create({
                 data: {
                     websiteId: 'rebilly.com',
-                    customerId: 'test-customer',
+                    customerId: 'test-customer-2',
                     currency: "CAD",
+                    redirectUrl: "https://example.com/redirect"
                 },
             });
 
-            console.log(response);
+            // url
 
+            console.log(response);
+            // log status code
+            console.log("Status Code:", response.statusCode);
+            // log headers
+            console.log("Headers:", response.headers);
 
             const cashierToken = response.fields.cashierToken;
 
             res.send({ cashierToken });
         } catch (error) {
+
+            // return response status code
+            console.error("Status Code:", error?.response?.status);
+            // return response headers
+            console.error("Headers:", error?.response?.headers);
+            // return full error response
+
             if (error?.response?.data) {
                 console.error(error.response.data);
             } else {
