@@ -1,4 +1,4 @@
-const customerId = "test-customer";
+const customerId = "test-customer-2";
 
 document.querySelectorAll(".currency-button").forEach( (button) => {
     button.addEventListener("click", async (e) => {
@@ -25,6 +25,9 @@ document.querySelectorAll(".currency-button").forEach( (button) => {
                 mountElement,
                 cashierToken,
             });
+            window.RebillyCashier.apiEndpoints = {
+                sandbox: "https://api-sandbox.local.rebilly.dev",
+            };
         } else {
             console.error("RebillyCashier library not loaded");
         }

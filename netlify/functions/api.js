@@ -425,9 +425,11 @@ export async function handler(event, context) {
 
         const rebilly = RebillyAPI({
             apiKey: process.env.REBILLY_API_KEY,
-            organizationId: 'summer-nest---phronesis',
-            sandbox: true
+            organizationId: '11111',
+            sandbox: true,
         });
+
+        rebilly.baseUrl = 'https://api-sandbox.local.rebilly.dev';
 
         try {
             const response = await rebilly.cashiers.create({
